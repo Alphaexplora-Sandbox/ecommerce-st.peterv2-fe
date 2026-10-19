@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Beneficiary, Plan } from '../types';
+import { bindInput, bindCheckbox, bindSelect, bindItemUpdate } from './handlers';
 
 export function calculateAge(dobString: string, currentYear: number = new Date().getFullYear()): number {
   const birthYear = new Date(dobString).getFullYear();
@@ -188,7 +189,7 @@ export function BeneficiaryForm({
                 type="text"
                 className="form-input"
                 value={assigneeName}
-                onChange={(e) => setAssigneeName(e.target.value)}
+                onChange={bindInput(setAssigneeName)}
                 required
               />
             </div>
@@ -200,7 +201,7 @@ export function BeneficiaryForm({
                 type="date"
                 className="form-input"
                 value={assigneeDob}
-                onChange={(e) => helpers.updateDob(e.target.value)}
+                onChange={bindInput(helpers.updateDob)}
                 required
               />
             </div>
@@ -213,7 +214,7 @@ export function BeneficiaryForm({
                   type="text"
                   className="form-input"
                   value={relationship}
-                  onChange={(e) => helpers.updateRelationship(e.target.value)}
+                  onChange={bindInput(helpers.updateRelationship)}
                   required
                 />
               </div>
@@ -276,7 +277,7 @@ export function BeneficiaryForm({
                   className="form-input"
                   style={{ padding: '0.4rem 0.6rem' }}
                   value={b.fullName}
-                  onChange={(e) => itemHelpers.handleUpdate(b.id, 'fullName', e.target.value)}
+                  onChange={bindItemUpdate(itemHelpers.handleUpdate, b.id, 'fullName')}
                   placeholder="e.g. Maria Santos"
                   required
                 />
@@ -290,7 +291,7 @@ export function BeneficiaryForm({
                   className="form-input"
                   style={{ padding: '0.4rem 0.6rem' }}
                   value={b.relationship}
-                  onChange={(e) => itemHelpers.handleUpdate(b.id, 'relationship', e.target.value)}
+                  onChange={bindItemUpdate(itemHelpers.handleUpdate, b.id, 'relationship')}
                   placeholder="e.g. Daughter"
                   required
                 />
@@ -306,7 +307,7 @@ export function BeneficiaryForm({
                   className="form-input"
                   style={{ padding: '0.4rem 0.6rem' }}
                   value={b.percentageShare}
-                  onChange={(e) => itemHelpers.handleUpdate(b.id, 'percentageShare', Number(e.target.value))}
+                  onChange={bindItemUpdate(itemHelpers.handleUpdate, b.id, 'percentageShare')}
                   required
                 />
               </div>
@@ -348,7 +349,7 @@ export function BeneficiaryForm({
                 id="gov-id-select"
                 className="form-select"
                 value={idType}
-                onChange={(e) => helpers.updateIdType(e.target.value)}
+                onChange={bindSelect(helpers.updateIdType)}
               >
                 <option value="Philippine Passport">Philippine Passport (DFA)</option>
                 <option value="PhilSys National ID">PhilSys National ID</option>
@@ -382,7 +383,7 @@ export function BeneficiaryForm({
               id="agreement-checkbox"
               type="checkbox"
               checked={signedAgreement}
-              onChange={(e) => helpers.toggleAgreement(e.target.checked)}
+              onChange={bindCheckbox(helpers.toggleAgreement)}
               style={{ width: '18px', height: '18px' }}
               required
             />
@@ -398,7 +399,7 @@ export function BeneficiaryForm({
               type="text"
               className="form-input"
               value={signatureName}
-              onChange={(e) => helpers.updateSignature(e.target.value)}
+              onChange={bindInput(helpers.updateSignature)}
               placeholder="e.g. Maria Santos"
               required
             />

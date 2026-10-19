@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Plan } from '../types';
 import { INITIAL_PLANS } from './PlanCatalog';
+import { bindSelect } from './handlers';
 
 export type PaymentTerm = 'spotcash' | 'monthly' | 'quarterly' | 'semiannual' | 'annual';
 
@@ -93,7 +94,7 @@ export function Calculator({ selectedPlan, onProceedToEnrollment }: CalculatorPr
             id="plan-selector"
             className="form-select"
             value={currentPlanId}
-            onChange={(e) => helpers.selectPlanId(e.target.value)}
+            onChange={bindSelect(helpers.selectPlanId)}
           >
             {INITIAL_PLANS.map((p) => (
               <option key={p.id} value={p.id}>

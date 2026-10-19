@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Beneficiary, Plan } from '../types';
+import { bindInput } from './handlers';
 
 export function isAccreditedAgent(code: string): boolean {
   return code.trim().toUpperCase() === 'AGNT-7821-MNL';
@@ -161,7 +162,7 @@ export function CheckoutView({ selectedPlan, paymentTerm, enrollmentData, onPaym
               type="text"
               className="form-input"
               value={agentCode}
-              onChange={(e) => helpers.updateAgent(e.target.value)}
+              onChange={bindInput(helpers.updateAgent)}
               placeholder="e.g. AGNT-7821-MNL"
             />
           </div>

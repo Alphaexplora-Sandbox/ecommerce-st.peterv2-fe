@@ -1,5 +1,5 @@
 import { renderToString } from 'react-dom/server';
-import { Navbar } from '../../src/components/Navbar';
+import { Navbar, handleTabSelection, NAV_TABS } from '../../src/components/Navbar';
 
 describe('Navbar', () => {
   it('renders default brand title', () => {
@@ -24,5 +24,13 @@ describe('Navbar', () => {
     expect(html).toContain('Dashboard');
     expect(html).toContain('Chapels');
     expect(html).toContain('E-Burol');
+  });
+
+  it('tests handleTabSelection and NAV_TABS', () => {
+    let selected = '';
+    const res = handleTabSelection('chapels', (t) => { selected = t; });
+    expect(res).toBe('chapels');
+    expect(selected).toBe('chapels');
+    expect(NAV_TABS.length).toBe(7);
   });
 });

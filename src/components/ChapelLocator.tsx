@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Chapel } from '../types';
+import { bindInput, bindSelect } from './handlers';
 
 export const INITIAL_CHAPELS: Chapel[] = [
   {
@@ -110,7 +111,7 @@ export function ChapelLocator() {
             className="form-input"
             placeholder="e.g. Quezon City, Cebu, Pampanga..."
             value={searchTerm}
-            onChange={(e) => helpers.updateSearch(e.target.value)}
+            onChange={bindInput(helpers.updateSearch)}
           />
         </div>
 
@@ -120,7 +121,7 @@ export function ChapelLocator() {
             id="region-select"
             className="form-select"
             value={selectedRegion}
-            onChange={(e) => helpers.updateRegion(e.target.value)}
+            onChange={bindSelect(helpers.updateRegion)}
           >
             <option value="All">All Regions</option>
             <option value="NCR">NCR (Metro Manila)</option>
