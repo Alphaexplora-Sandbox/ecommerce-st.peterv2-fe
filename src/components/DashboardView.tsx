@@ -2,7 +2,9 @@ import { useState } from 'react';
 
 export function advanceInstallment(currentPaid: number, total: number = 60): { newCount: number; receiptRef: string } {
   const newCount = currentPaid >= total ? total : currentPaid + 1;
-  const receiptRef = `OR-STP-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+  // A receipt reference must not be guessable, so it comes from the CSPRNG.
+  const suffix = Array.from(crypto.getRandomValues(new Uint8Array(6)), (byte) => (byte % 36).toString(36)).join('');
+  const receiptRef = `OR-STP-${suffix.toUpperCase()}`;
   return { newCount, receiptRef };
 }
 

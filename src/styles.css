@@ -6,6 +6,9 @@
   --gold-primary: #D97706;
   --gold-light: #F59E0B;
   --gold-subtle: rgba(217, 119, 6, 0.15);
+  /* Gold behind white text: 5:1 contrast (WCAG AA); --gold-primary is 3.2:1. */
+  --gold-strong: #B45309;
+  --gold-strong-hover: #92400E;
   --cream-bg: #F8FAFC;
   --cream-card: #FFFFFF;
   --cream-border: #E2E8F0;
@@ -122,7 +125,7 @@ a {
 
 .nav-btn.active {
   color: #FFFFFF;
-  background-color: var(--gold-primary);
+  background-color: var(--gold-strong);
   border-color: var(--gold-light);
 }
 
@@ -334,7 +337,7 @@ a {
 
 .btn-primary {
   flex: 1;
-  background-color: var(--gold-primary);
+  background-color: var(--gold-strong);
   color: #FFFFFF;
   border: none;
   padding: 0.65rem 1rem;
@@ -347,7 +350,7 @@ a {
 }
 
 .btn-primary:hover {
-  background-color: var(--gold-light);
+  background-color: var(--gold-strong-hover);
 }
 
 .btn-outline {
